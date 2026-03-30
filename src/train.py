@@ -16,6 +16,7 @@ PROCESSED_DIR = "data/processed"
 def run_training():
 
     os.makedirs(PROCESSED_DIR, exist_ok=True)
+    os.makedirs("models", exist_ok=True)
 
     # ---------- CHECK IF PROCESSED DATA EXISTS ----------
     X_path = os.path.join(PROCESSED_DIR, "X_all.npz")
@@ -39,11 +40,11 @@ def run_training():
         X, tfidf = prepare_tfidf(data)
 
         # ---------- SBERT (OPTIONAL) ----------
-        USE_SBERT = False   # change to True if needed
+        USE_SBERT = False
 
         if USE_SBERT:
             print("🧠 Computing SBERT embeddings...")
-            X_sem = compute_sbert(data, None)  # update if using tmpl_map
+            X_sem = compute_sbert(data, None)
         else:
             print("⚡ Using dummy semantic features...")
             X_sem = np.zeros((X.shape[0], 384))
@@ -56,7 +57,6 @@ def run_training():
 
         # ---------- SAVE ----------
         print("💾 Saving processed dataset...")
-
         save_npz(X_path, X_all)
         np.save(y_path, y)
 
@@ -78,9 +78,21 @@ def run_training():
 
     # ---------- SAVE MODELS ----------
     print("💾 Saving models...")
-
     joblib.dump(lr, "models/lr.pkl")
     joblib.dump(iforest, "models/iforest.pkl")
+
+    # ---------- 🔥 SAVE IF SCALING (IMPORTANT) ----------
+    print("📊 Computing Isolation Forest scaling...")
+
+    s_if_all = -iforest.decision_function(X_all)
+
+    if_min = s_if_all.min()
+    if_max = s_if_all.max()
+
+    np.save("models/if_min.npy", if_min)
+    np.save("models/if_max.npy", if_max)
+
+    print(f"IF scaling saved: min={if_min:.4f}, max={if_max:.4f}")
 
     print("✅ Training complete!")
 
