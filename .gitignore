@@ -1,0 +1,65 @@
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Virtual Environment
+venv/
+.env/
+.env.*
+
+# -----------------------------
+# Data files (large / sensitive)
+# -----------------------------
+data/processed/
+*.npy
+*.npz
+*.csv
+
+# If you want to keep raw data, comment above and use:
+# data/processed/
+
+# -----------------------------
+# Models (optional)
+# -----------------------------
+models/*.pkl
+models/*.joblib
+
+# (If you want to upload trained models, comment above)
+
+# -----------------------------
+# Jupyter / Colab
+# -----------------------------
+.ipynb_checkpoints/
+*.ipynb
+
+# -----------------------------
+# Logs
+# -----------------------------
+*.log
+
+# -----------------------------
+# OS files
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# VS Code
+# -----------------------------
+.vscode/
+
+# -----------------------------
+# Streamlit cache
+# -----------------------------
+.streamlit/
+
+# -----------------------------
+# Misc
+# -----------------------------
+*.tmp
+*.bak
