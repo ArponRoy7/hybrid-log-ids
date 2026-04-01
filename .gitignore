@@ -7,29 +7,28 @@ __pycache__/
 *.pyd
 *.so
 
+# -----------------------------
 # Virtual Environment
+# -----------------------------
 venv/
 .env/
 .env.*
 
 # -----------------------------
-# Data files (large / sensitive)
+# Data files (IGNORE HEAVY DATA)
 # -----------------------------
 data/processed/
-*.npy
-*.npz
-*.csv
+data/raw/
 
-# If you want to keep raw data, comment above and use:
-# data/processed/
+# ❗ Allow specific files if needed (optional)
+# !data/raw/sample.csv
 
 # -----------------------------
-# Models (optional)
+# Models (KEEP MODELS!)
 # -----------------------------
-models/*.pkl
-models/*.joblib
-
-# (If you want to upload trained models, comment above)
+# ❌ DO NOT IGNORE models
+# models/*.pkl   ← REMOVE THIS
+# *.npy          ← REMOVE THIS
 
 # -----------------------------
 # Jupyter / Colab
